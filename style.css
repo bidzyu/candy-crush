@@ -1,0 +1,222 @@
+:root {
+  --grid-size: min(95vh, 95vw);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  --cell-count: 9;
+  --cell-size: calc(var(--grid-size) / var(--cell-count));
+  height: 100vh;
+  width: 100vw;
+  background: url(./img/background.jpg) no-repeat center center fixed;
+  background-size: cover;
+  font-size: 2vw;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+#game-menu-wrapper {
+  width: min(90vh, 90vw);
+  height: min(90vh, 90vw);
+  max-width: 600px;
+  max-height: 800px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#game-menu {
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(173, 216, 230, 0.589);
+  border: 1px solid rgb(68, 109, 150);
+  font-size: min(2.5vh, 4vw);
+}
+
+#start-game-btn {
+  width: 80%;
+  padding: min(2vh, 3.5vw) min(3vh, 5vw);
+  font-size: min(4vh, 6.5vw);
+  color: rgb(68, 109, 150);
+  border: 1px solid rgb(68, 109, 150);
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+#start-game-btn:hover {
+  border: 1px solid rgb(60, 104, 148);
+  color: rgb(60, 104, 148);
+  background-color: rgba(15, 111, 207, 0.199);
+  transition: all 0.2s ease-in-out;
+}
+
+#show-menu-btn {
+  display: none;
+  position: absolute;
+  top: min(1.5vh, 3vw);
+  right: min(1.5vh, 3vw);
+  width: min(6vh, 12vw);
+  height: min(6vh, 12vw);
+  border-radius: 50%;
+  font-size: min(3vh, 6vw);
+  line-height: min(6vh, 12vw);
+  color: rgb(68, 109, 150);
+  border: 1px solid rgb(68, 109, 150);
+  background-color: rgba(173, 216, 230, 0.589);
+}
+
+#show-menu-btn:hover {
+  border: 1px solid rgb(60, 104, 148);
+  color: rgb(60, 104, 148);
+  background-color: rgba(255, 255, 255, 0.644);
+  transition: all 0.2s ease-in-out;
+}
+
+.score-elem {
+  transition: all 0.4s ease-in-out;
+  opacity: 1;
+}
+
+.blink {
+  opacity: 0;
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 2%;
+  flex-wrap: wrap;
+}
+
+form > label {
+  border: 1px solid rgb(68, 109, 150);
+  color: rgb(68, 109, 150);
+  width: 39%;
+  padding: min(2vh, 3.5vw) min(3vh, 5vw);
+  text-align: center;
+  margin-top: 2%;
+  transition: all 0.2s ease-in-out;
+}
+
+form > input {
+  display: none;
+}
+
+.score-wrapper {
+  font-size: min(3.5vh, 7vw);
+}
+
+#grid-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+#grid {
+  display: grid;
+  width: var(--grid-size);
+  height: var(--grid-size);
+  grid-template-columns: repeat(var(--cell-count), auto);
+  grid-template-rows: repeat(var(--cell-count), auto);
+  background-color: rgba(173, 216, 230, 0.589);
+  border: 1px solid rgb(68, 109, 150);
+  border-radius: 10px;
+  box-sizing: content-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.cell {
+  display: block;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  box-sizing: border-box;
+  transition: all 0.5s linear;
+}
+
+.tile {
+  --x: 3;
+  --y: 3;
+  display: block;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  background: no-repeat center center fixed;
+  background-size: cover;
+  box-sizing: border-box;
+  position: absolute;
+  left: calc(var(--cell-size) * var(--x));
+  top: calc(var(--cell-size) * var(--y));
+  z-index: 999;
+  transition: all 0.5s;
+}
+
+.tile img {
+  width: 100%;
+  height: 100%;
+}
+
+.selected {
+  background-color: rgba(122, 255, 122, 0.726);
+}
+
+.neighbor {
+  background-color: rgba(122, 255, 211, 0.726);
+}
+
+.remove {
+  animation: anim 0.6s linear;
+}
+
+.show {
+  animation: show 0.6s linear;
+}
+
+.no-anim {
+  transition: 0s;
+}
+
+.selected-game-size {
+  border: 1px solid rgb(53, 77, 85);
+  color: #fff;
+  background-color: rgba(53, 77, 85, 0.753);
+}
+
+@keyframes anim {
+  0% {
+    transform: scale(100%);
+  }
+
+  100% {
+    transform: scale(0%);
+  }
+}
+
+@keyframes show {
+  0% {
+    transform: scale(0%);
+  }
+
+  100% {
+    transform: scale(100%);
+  }
+}
